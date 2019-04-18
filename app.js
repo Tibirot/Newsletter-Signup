@@ -1,5 +1,5 @@
 //jshint esversion: 6
-
+require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
@@ -34,10 +34,10 @@ app.post('/', function(req, res) {
   var jsonData = JSON.stringify(data);
 
   var options = {
-    url: "https://us20.api.mailchimp.com/3.0/lists/1c63ccb67d",
+    url: process.env.MAIL_URL,
     method: "POST",
     headers: {
-      "Authorization": "tibirot 226408b0768e9d3ce5504ec630aefc63-us20"
+      "Authorization": process.env.MAILCHIMP_AUTH
     },
     body: jsonData,
   };
@@ -63,9 +63,3 @@ app.post("/failure", function(req, res){
 app.listen(process.env.PORT || 3000, function () {
   console.log("Server is runing on port 3000");
 });
-
-// API Key
-// 226408b0768e9d3ce5504ec630aefc63-us20
-
-//List ID
-// 1c63ccb67d
